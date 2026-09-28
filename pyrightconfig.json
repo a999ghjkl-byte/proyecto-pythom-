@@ -1,0 +1,18 @@
+{
+    "include": [
+        "kardex_login"
+    ],
+    "extraPaths": [
+        "kardex_login",
+        "C:/Users/Administrator/AppData/Local/Programs/Python/Python311/Lib/site-packages"
+    ],
+    "executionEnvironments": [
+        {
+            "root": "kardex_login",
+            "extraPaths": [
+                "kardex_login",
+                "C:/Users/Administrator/AppData/Local/Programs/Python/Python311/Lib/site-packages"
+            ]
+        }
+    ]
+}
