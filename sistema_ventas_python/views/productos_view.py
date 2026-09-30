@@ -68,13 +68,13 @@ class ProductoModalDialog(ctk.CTkToplevel):
 
         f_costo = ctk.CTkFrame(precios_row, fg_color="transparent")
         f_costo.grid(row=0, column=0, sticky="ew", padx=(0, 5))
-        ctk.CTkLabel(f_costo, text="Precio Costo ($)", font=ctk.CTkFont(size=12, weight="bold"), anchor="w").pack(fill="x")
+        ctk.CTkLabel(f_costo, text="Precio Costo (S/.)", font=ctk.CTkFont(size=12, weight="bold"), anchor="w").pack(fill="x")
         self.txt_costo = ctk.CTkEntry(f_costo, height=36, placeholder_text="0.00")
         self.txt_costo.pack(fill="x", pady=(2, 0))
 
         f_venta = ctk.CTkFrame(precios_row, fg_color="transparent")
         f_venta.grid(row=0, column=1, sticky="ew", padx=(5, 0))
-        ctk.CTkLabel(f_venta, text="Precio Venta ($) *", font=ctk.CTkFont(size=12, weight="bold"), anchor="w").pack(fill="x")
+        ctk.CTkLabel(f_venta, text="Precio Venta (S/.) *", font=ctk.CTkFont(size=12, weight="bold"), anchor="w").pack(fill="x")
         self.txt_venta = ctk.CTkEntry(f_venta, height=36, placeholder_text="0.00")
         self.txt_venta.pack(fill="x", pady=(2, 0))
 
@@ -253,8 +253,8 @@ class ProductosView(ctk.CTkFrame):
             ("CÓDIGO", 110),
             ("PRODUCTO", 280),
             ("CATEGORÍA", 130),
-            ("PRECIO VENTA", 110),
-            ("COSTO", 90),
+            ("PRECIO VENTA (S/.)", 120),
+            ("COSTO (S/.)", 100),
             ("STOCK ACTUAL", 110),
             ("ESTADO", 100),
             ("ACCIONES", 110 if self.usuario.rol != "CONSULTOR" else 60),
@@ -369,8 +369,8 @@ class ProductosView(ctk.CTkFrame):
             # Precio Venta
             lbl_venta = ctk.CTkLabel(
                 row_frame,
-                text=f"${p.precio_venta:,.2f}",
-                width=110,
+                text=f"S/. {p.precio_venta:,.2f}",
+                width=120,
                 font=ctk.CTkFont(size=12, weight="bold"),
                 text_color="#10b981"
             )
@@ -379,8 +379,8 @@ class ProductosView(ctk.CTkFrame):
             # Costo
             lbl_costo = ctk.CTkLabel(
                 row_frame,
-                text=f"${p.precio_costo:,.2f}",
-                width=90,
+                text=f"S/. {p.precio_costo:,.2f}",
+                width=100,
                 font=ctk.CTkFont(size=11),
                 text_color="#718096"
             )

@@ -108,9 +108,9 @@ class ReportesView(ctk.CTkFrame):
         self.cards_periodo.pack(fill="x", padx=20, pady=(0, 10))
         self.cards_periodo.grid_columnconfigure((0, 1, 2), weight=1)
 
-        self.card_total = self._crear_mini_kpi(self.cards_periodo, 0, "Facturación Período", "$0.00", "#10b981")
+        self.card_total = self._crear_mini_kpi(self.cards_periodo, 0, "Facturación Período", "S/. 0.00", "#10b981")
         self.card_cant = self._crear_mini_kpi(self.cards_periodo, 1, "Ventas Registradas", "0 órdenes", "#3b82f6")
-        self.card_prom = self._crear_mini_kpi(self.cards_periodo, 2, "Ticket Promedio Período", "$0.00", "#8b5cf6")
+        self.card_prom = self._crear_mini_kpi(self.cards_periodo, 2, "Ticket Promedio Período", "S/. 0.00", "#8b5cf6")
 
         # Encabezado Tabla
         header_table = ctk.CTkFrame(self, height=36, corner_radius=8, fg_color=("#edf2f7", "#171923"))
@@ -123,7 +123,7 @@ class ReportesView(ctk.CTkFrame):
             ("CLIENTE", 230),
             ("MÉTODO", 100),
             ("CAJERO", 130),
-            ("TOTAL", 100),
+            ("TOTAL (S/.)", 110),
             ("DETALLE", 80),
         ]
 
@@ -185,9 +185,9 @@ class ReportesView(ctk.CTkFrame):
         cant_v = len(ventas)
         prom = round(tot_monto / max(cant_v, 1), 2) if cant_v > 0 else 0.0
 
-        self.card_total.configure(text=f"${tot_monto:,.2f}")
+        self.card_total.configure(text=f"S/. {tot_monto:,.2f}")
         self.card_cant.configure(text=f"{cant_v} órdenes")
-        self.card_prom.configure(text=f"${prom:,.2f}")
+        self.card_prom.configure(text=f"S/. {prom:,.2f}")
 
         # Renderizar filas
         for w in self.table_scroll.winfo_children():
@@ -231,7 +231,7 @@ class ReportesView(ctk.CTkFrame):
             lbl_u.pack(side="left", padx=5)
 
             # Total
-            lbl_tot = ctk.CTkLabel(row, text=f"${v['total']:,.2f}", width=100, font=ctk.CTkFont(size=13, weight="bold"), text_color="#10b981")
+            lbl_tot = ctk.CTkLabel(row, text=f"S/. {v['total']:,.2f}", width=110, font=ctk.CTkFont(size=13, weight="bold"), text_color="#10b981")
             lbl_tot.pack(side="left", padx=5)
 
             # Botón ver detalle

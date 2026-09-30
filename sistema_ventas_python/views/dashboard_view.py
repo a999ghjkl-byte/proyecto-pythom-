@@ -50,9 +50,9 @@ class DashboardView(ctk.CTkFrame):
         for i in range(4):
             self.cards_container.grid_columnconfigure(i, weight=1, uniform="kpi")
 
-        self.card_ventas = self._crear_kpi_card(self.cards_container, 0, "💰 Facturación Total", "$0.00", "Hoy: $0.00", "#10b981")
+        self.card_ventas = self._crear_kpi_card(self.cards_container, 0, "💰 Facturación Total", "S/. 0.00", "Hoy: S/. 0.00", "#10b981")
         self.card_pedidos = self._crear_kpi_card(self.cards_container, 1, "🛍️ Pedidos Realizados", "0", "Órdenes cerradas", "#3b82f6")
-        self.card_ticket = self._crear_kpi_card(self.cards_container, 2, "🏷️ Ticket Promedio", "$0.00", "Por transacción", "#8b5cf6")
+        self.card_ticket = self._crear_kpi_card(self.cards_container, 2, "🏷️ Ticket Promedio", "S/. 0.00", "Por transacción", "#8b5cf6")
         self.card_stock = self._crear_kpi_card(self.cards_container, 3, "⚠️ Stock Bajo / Crítico", "0 productos", "Alerta inventario", "#ef4444")
 
         # Fila de Accesos directos si tiene permisos (no consultor)
@@ -194,13 +194,13 @@ class DashboardView(ctk.CTkFrame):
         """Consulta métricas a través de la capa de servicio y actualiza la vista."""
         resumen = self.reporte_service.obtener_resumen_general()
 
-        self.card_ventas["val"].configure(text=f"${resumen['total_ingresos']:,.2f}")
-        self.card_ventas["sub"].configure(text=f"Hoy: ${resumen['ventas_hoy_monto']:,.2f} ({resumen['pedidos_hoy']} ventas)")
+        self.card_ventas["val"].configure(text=f"S/. {resumen['total_ingresos']:,.2f}")
+        self.card_ventas["sub"].configure(text=f"Hoy: S/. {resumen['ventas_hoy_monto']:,.2f} ({resumen['pedidos_hoy']} ventas)")
 
         self.card_pedidos["val"].configure(text=str(resumen["total_pedidos"]))
         self.card_pedidos["sub"].configure(text=f"{resumen['total_clientes']} clientes registrados")
 
-        self.card_ticket["val"].configure(text=f"${resumen['ticket_promedio']:,.2f}")
+        self.card_ticket["val"].configure(text=f"S/. {resumen['ticket_promedio']:,.2f}")
         self.card_ticket["sub"].configure(text=f"{resumen['total_stock_unidades']} unidades en catálogo")
 
         stock_bajo = resumen["productos_stock_bajo"]
@@ -237,7 +237,7 @@ class DashboardView(ctk.CTkFrame):
                 lbl_meta = ctk.CTkLabel(info_frame, text=f"{p['categoria']} • {p['unidades']} unidades vendidas", font=ctk.CTkFont(size=11), text_color="#718096", anchor="w")
                 lbl_meta.pack(fill="x")
 
-                lbl_monto = ctk.CTkLabel(item_row, text=f"${p['monto']:,.2f}", font=ctk.CTkFont(weight="bold", size=13), text_color="#10b981")
+                lbl_monto = ctk.CTkLabel(item_row, text=f"S/. {p['monto']:,.2f}", font=ctk.CTkFont(weight="bold", size=13), text_color="#10b981")
                 lbl_monto.pack(side="right", padx=12)
 
         # Actualizar Métodos de Pago
@@ -266,5 +266,5 @@ class DashboardView(ctk.CTkFrame):
                 lbl_cant = ctk.CTkLabel(detalles_frame, text=f"{m['cantidad']} transacciones", font=ctk.CTkFont(size=11), text_color="#718096", anchor="w")
                 lbl_cant.pack(fill="x")
 
-                lbl_monto = ctk.CTkLabel(p_row, text=f"${m['monto']:,.2f}", font=ctk.CTkFont(weight="bold", size=13), text_color="#3b82f6")
+                lbl_monto = ctk.CTkLabel(p_row, text=f"S/. {m['monto']:,.2f}", font=ctk.CTkFont(weight="bold", size=13), text_color="#3b82f6")
                 lbl_monto.pack(side="right", padx=12)

@@ -71,7 +71,7 @@ class ComprobanteModalDialog(ctk.CTkToplevel):
             lbl_desc = ctk.CTkLabel(i_row, text=f"{det.cantidad}x {det.producto_nombre}", font=ctk.CTkFont(size=11), anchor="w")
             lbl_desc.pack(side="left", fill="x", expand=True)
 
-            lbl_sub = ctk.CTkLabel(i_row, text=f"${det.subtotal:,.2f}", font=ctk.CTkFont(size=11, weight="bold"))
+            lbl_sub = ctk.CTkLabel(i_row, text=f"S/. {det.subtotal:,.2f}", font=ctk.CTkFont(size=11, weight="bold"))
             lbl_sub.pack(side="right")
 
         # Divisor
@@ -82,15 +82,15 @@ class ComprobanteModalDialog(ctk.CTkToplevel):
         tot_frame = ctk.CTkFrame(container, fg_color="transparent")
         tot_frame.pack(fill="x", padx=20, pady=5)
 
-        self._add_info_row(tot_frame, "Subtotal:", f"${self.venta.subtotal:,.2f}")
+        self._add_info_row(tot_frame, "Subtotal:", f"S/. {self.venta.subtotal:,.2f}")
         if self.venta.descuento > 0:
-            self._add_info_row(tot_frame, "Descuento:", f"-${self.venta.descuento:,.2f}")
-        self._add_info_row(tot_frame, "Impuesto (18%):", f"${self.venta.impuesto:,.2f}")
+            self._add_info_row(tot_frame, "Descuento:", f"-S/. {self.venta.descuento:,.2f}")
+        self._add_info_row(tot_frame, "IGV (18%):", f"S/. {self.venta.impuesto:,.2f}")
 
         row_total = ctk.CTkFrame(tot_frame, fg_color="transparent")
         row_total.pack(fill="x", pady=(5, 0))
         ctk.CTkLabel(row_total, text="TOTAL:", font=ctk.CTkFont(size=15, weight="bold")).pack(side="left")
-        ctk.CTkLabel(row_total, text=f"${self.venta.total:,.2f}", font=ctk.CTkFont(size=18, weight="bold"), text_color="#10b981").pack(side="right")
+        ctk.CTkLabel(row_total, text=f"S/. {self.venta.total:,.2f}", font=ctk.CTkFont(size=18, weight="bold"), text_color="#10b981").pack(side="right")
 
         # Botón Cerrar
         btn_cerrar = ctk.CTkButton(
@@ -262,7 +262,7 @@ class VentasView(ctk.CTkFrame):
 
         f_desc = ctk.CTkFrame(row_inputs, fg_color="transparent")
         f_desc.grid(row=0, column=1, sticky="ew", padx=(5, 0))
-        ctk.CTkLabel(f_desc, text="Descuento ($)", font=ctk.CTkFont(size=11, weight="bold"), text_color="#718096", anchor="w").pack(fill="x")
+        ctk.CTkLabel(f_desc, text="Descuento (S/.)", font=ctk.CTkFont(size=11, weight="bold"), text_color="#718096", anchor="w").pack(fill="x")
         self.txt_descuento = ctk.CTkEntry(f_desc, height=32, placeholder_text="0.00")
         self.txt_descuento.insert(0, "0.00")
         self.txt_descuento.pack(fill="x", pady=(2, 0))
@@ -275,20 +275,20 @@ class VentasView(ctk.CTkFrame):
         r_sub = ctk.CTkFrame(desglose, fg_color="transparent")
         r_sub.pack(fill="x", pady=1)
         ctk.CTkLabel(r_sub, text="Subtotal:", font=ctk.CTkFont(size=12), text_color="#718096").pack(side="left")
-        self.lbl_subtotal_val = ctk.CTkLabel(r_sub, text="$0.00", font=ctk.CTkFont(size=12, weight="bold"))
+        self.lbl_subtotal_val = ctk.CTkLabel(r_sub, text="S/. 0.00", font=ctk.CTkFont(size=12, weight="bold"))
         self.lbl_subtotal_val.pack(side="right")
 
         r_imp = ctk.CTkFrame(desglose, fg_color="transparent")
         r_imp.pack(fill="x", pady=1)
-        ctk.CTkLabel(r_imp, text="Impuesto (18%):", font=ctk.CTkFont(size=12), text_color="#718096").pack(side="left")
-        self.lbl_impuesto_val = ctk.CTkLabel(r_imp, text="$0.00", font=ctk.CTkFont(size=12, weight="bold"))
+        ctk.CTkLabel(r_imp, text="IGV (18%):", font=ctk.CTkFont(size=12), text_color="#718096").pack(side="left")
+        self.lbl_impuesto_val = ctk.CTkLabel(r_imp, text="S/. 0.00", font=ctk.CTkFont(size=12, weight="bold"))
         self.lbl_impuesto_val.pack(side="right")
 
         # TOTAL GRANDE
         r_tot = ctk.CTkFrame(desglose, fg_color="transparent")
         r_tot.pack(fill="x", pady=(6, 2))
         ctk.CTkLabel(r_tot, text="TOTAL A PAGAR:", font=ctk.CTkFont(size=15, weight="bold")).pack(side="left")
-        self.lbl_total_val = ctk.CTkLabel(r_tot, text="$0.00", font=ctk.CTkFont(size=22, weight="bold"), text_color="#10b981")
+        self.lbl_total_val = ctk.CTkLabel(r_tot, text="S/. 0.00", font=ctk.CTkFont(size=22, weight="bold"), text_color="#10b981")
         self.lbl_total_val.pack(side="right")
 
         # Botón grande COMPLETAR VENTA
@@ -366,7 +366,7 @@ class VentasView(ctk.CTkFrame):
             right_sub = ctk.CTkFrame(card, fg_color="transparent")
             right_sub.pack(side="right", padx=12)
 
-            lbl_precio = ctk.CTkLabel(right_sub, text=f"${p.precio_venta:,.2f}", font=ctk.CTkFont(size=14, weight="bold"), text_color="#10b981")
+            lbl_precio = ctk.CTkLabel(right_sub, text=f"S/. {p.precio_venta:,.2f}", font=ctk.CTkFont(size=14, weight="bold"), text_color="#10b981")
             lbl_precio.pack(side="left", padx=(0, 10))
 
             btn_add = ctk.CTkButton(
@@ -492,7 +492,7 @@ class VentasView(ctk.CTkFrame):
                 # Subtotal
                 lbl_sub = ctk.CTkLabel(
                     row,
-                    text=f"${item.subtotal:,.2f}",
+                    text=f"S/. {item.subtotal:,.2f}",
                     font=ctk.CTkFont(size=12, weight="bold"),
                     text_color="#10b981",
                     width=65,
@@ -525,9 +525,9 @@ class VentasView(ctk.CTkFrame):
         items_list = list(self.carrito.values())
         totales = self.venta_service.calcular_totales(items_list, descuento=desc_val)
 
-        self.lbl_subtotal_val.configure(text=f"${totales['subtotal']:,.2f}")
-        self.lbl_impuesto_val.configure(text=f"${totales['impuesto']:,.2f}")
-        self.lbl_total_val.configure(text=f"${totales['total']:,.2f}")
+        self.lbl_subtotal_val.configure(text=f"S/. {totales['subtotal']:,.2f}")
+        self.lbl_impuesto_val.configure(text=f"S/. {totales['impuesto']:,.2f}")
+        self.lbl_total_val.configure(text=f"S/. {totales['total']:,.2f}")
 
     def _completar_venta(self):
         if not self.carrito:

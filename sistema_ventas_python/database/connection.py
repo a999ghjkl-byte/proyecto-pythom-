@@ -148,24 +148,24 @@ class Database:
             ("DNI", "10456789", "Carlos Benavides Torres", "carlos.b@empresa.com", "912345678", "Av. Arequipa 2100"),
         ])
 
-        # Productos iniciales
+        # Productos iniciales con precios reales en Soles peruanos (S/.)
         cursor.executemany("""
             INSERT INTO productos (codigo, nombre, categoria, precio_costo, precio_venta, stock_actual, stock_minimo)
             VALUES (?, ?, ?, ?, ?, ?, ?);
         """, [
-            ("PROD-001", "Laptop Lenovo ThinkPad 15\"", "Computación", 650.00, 899.00, 15, 4),
-            ("PROD-002", "Mouse Inalámbrico Logitech MX", "Accesorios", 22.00, 39.90, 30, 8),
-            ("PROD-003", "Teclado Mecánico RGB Redragon", "Accesorios", 35.00, 59.00, 20, 5),
-            ("PROD-004", "Monitor Dell 27\" IPS Full HD", "Monitores", 140.00, 219.00, 10, 3),
-            ("PROD-005", "Disco Sólido SSD NVMe 1TB Kingston", "Almacenamiento", 45.00, 75.00, 25, 6),
-            ("PROD-006", "Memoria RAM 16GB DDR4 Corsair", "Componentes", 28.00, 48.00, 18, 5),
-            ("PROD-007", "Auriculares Gamer HyperX Cloud II", "Audio", 49.00, 85.00, 12, 4),
-            ("PROD-008", "Cámara Web Full HD 1080p con Micrófono", "Accesorios", 18.00, 34.50, 8, 5),
-            ("PROD-009", "Impresora Multifuncional Epson EcoTank", "Impresoras", 180.00, 269.00, 6, 2),
-            ("PROD-010", "Router WiFi 6 Gigabit TP-Link", "Redes", 40.00, 69.90, 3, 5), # Stock bajo para alerta
+            ("PROD-001", "Laptop Lenovo ThinkPad 15\"", "Computación", 2400.00, 3299.00, 15, 4),
+            ("PROD-002", "Mouse Inalámbrico Logitech MX", "Accesorios", 180.00, 289.00, 30, 8),
+            ("PROD-003", "Teclado Mecánico RGB Redragon", "Accesorios", 120.00, 199.00, 20, 5),
+            ("PROD-004", "Monitor Dell 27\" IPS Full HD", "Monitores", 520.00, 799.00, 10, 3),
+            ("PROD-005", "Disco Sólido SSD NVMe 1TB Kingston", "Almacenamiento", 190.00, 289.00, 25, 6),
+            ("PROD-006", "Memoria RAM 16GB DDR4 Corsair", "Componentes", 110.00, 179.00, 18, 5),
+            ("PROD-007", "Auriculares Gamer HyperX Cloud II", "Audio", 210.00, 329.00, 12, 4),
+            ("PROD-008", "Cámara Web Full HD 1080p con Micrófono", "Accesorios", 75.00, 129.00, 8, 5),
+            ("PROD-009", "Impresora Multifuncional Epson EcoTank", "Impresoras", 680.00, 999.00, 6, 2),
+            ("PROD-010", "Router WiFi 6 Gigabit TP-Link", "Redes", 160.00, 249.00, 3, 5), # Stock bajo para alerta
         ])
 
-        # Ventas iniciales para tener reportes con datos reales
+        # Ventas iniciales para tener reportes con datos reales en Soles (S/.)
         cursor.execute("SELECT id FROM usuarios WHERE username = 'admin@lozano.com';")
         admin_id = cursor.fetchone()["id"]
 
@@ -173,9 +173,9 @@ class Database:
         client_ids = [row["id"] for row in cursor.fetchall()]
 
         ventas_demo = [
-            ("VNT-2026-0001", client_ids[0], admin_id, "EFECTIVO", 899.00, 161.82, 0.0, 1060.82, "Primera venta Lenovo"),
-            ("VNT-2026-0002", client_ids[1], admin_id, "TRANSFERENCIA", 438.00, 78.84, 10.0, 506.84, "Compra corporativa accesorios"),
-            ("VNT-2026-0003", client_ids[2], admin_id, "TARJETA", 219.00, 39.42, 0.0, 258.42, "Monitor Dell"),
+            ("VNT-2026-0001", client_ids[0], admin_id, "EFECTIVO", 3299.00, 593.82, 0.0, 3892.82, "Primera venta Laptop Lenovo"),
+            ("VNT-2026-0002", client_ids[1], admin_id, "TRANSFERENCIA", 1775.00, 310.50, 50.0, 2035.50, "Compra corporativa accesorios"),
+            ("VNT-2026-0003", client_ids[2], admin_id, "TARJETA", 799.00, 143.82, 0.0, 942.82, "Monitor Dell"),
         ]
 
         for cod, cl_id, us_id, metodo, sub, imp, desc, tot, notas in ventas_demo:
@@ -186,10 +186,10 @@ class Database:
             v_id = cursor.lastrowid
 
             if cod == "VNT-2026-0001":
-                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 1, 1, 899.00, 899.00);", (v_id,))
+                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 1, 1, 3299.00, 3299.00);", (v_id,))
             elif cod == "VNT-2026-0002":
-                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 2, 2, 39.90, 79.80);", (v_id,))
-                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 3, 2, 59.00, 118.00);", (v_id,))
-                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 4, 1, 219.00, 219.00);", (v_id,))
+                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 2, 2, 289.00, 578.00);", (v_id,))
+                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 3, 2, 199.00, 398.00);", (v_id,))
+                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 4, 1, 799.00, 799.00);", (v_id,))
             elif cod == "VNT-2026-0003":
-                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 4, 1, 219.00, 219.00);", (v_id,))
+                cursor.execute("INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, 4, 1, 799.00, 799.00);", (v_id,))

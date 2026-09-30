@@ -87,7 +87,6 @@ class LoginView(ctk.CTkFrame):
             font=ctk.CTkFont(size=13)
         )
         self.txt_usuario.pack(fill="x", pady=(0, 15))
-        self.txt_usuario.insert(0, "admin@lozano.com")
 
         # Campo Contraseña
         lbl_pass = ctk.CTkLabel(
@@ -110,7 +109,6 @@ class LoginView(ctk.CTkFrame):
             font=ctk.CTkFont(size=14)
         )
         self.txt_password.pack(side="left", fill="x", expand=True, padx=(0, 8))
-        self.txt_password.insert(0, "123456")
 
         self.btn_toggle_pass = ctk.CTkButton(
             self.pass_container,
@@ -142,51 +140,6 @@ class LoginView(ctk.CTkFrame):
         self.txt_usuario.bind("<Return>", lambda event: self._ejecutar_login())
         self.txt_password.bind("<Return>", lambda event: self._ejecutar_login())
 
-        # Acceso Rápido / Credenciales de demostración
-        demo_frame = ctk.CTkFrame(
-            inner_frame,
-            corner_radius=12,
-            fg_color=("#f8fafc", "#171923"),
-            border_width=1,
-            border_color=("#edf2f7", "#2d3748")
-        )
-        demo_frame.pack(fill="x", pady=(5, 0))
-
-        lbl_demo = ctk.CTkLabel(
-            demo_frame,
-            text="🔑 Accesos Rápidos de Prueba",
-            font=ctk.CTkFont(size=11, weight="bold"),
-            text_color=("#4a5568", "#a0aec0")
-        )
-        lbl_demo.pack(pady=(8, 4))
-
-        btns_row = ctk.CTkFrame(demo_frame, fg_color="transparent")
-        btns_row.pack(pady=(0, 8), fill="x", padx=10)
-
-        btn_admin = ctk.CTkButton(
-            btns_row,
-            text="Admin (123456)",
-            font=ctk.CTkFont(size=11),
-            height=30,
-            fg_color=("#e2e8f0", "#2d3748"),
-            text_color=("#2b6cb0", "#63b3ed"),
-            hover_color=("#cbd5e0", "#4a5568"),
-            command=lambda: self._set_credentials("admin@lozano.com", "123456")
-        )
-        btn_admin.pack(side="left", expand=True, fill="x", padx=3)
-
-        btn_lucia = ctk.CTkButton(
-            btns_row,
-            text="Consultor (lucia@edu.com)",
-            font=ctk.CTkFont(size=11),
-            height=30,
-            fg_color=("#e2e8f0", "#2d3748"),
-            text_color=("#2c7a7b", "#4fd1c5"),
-            hover_color=("#cbd5e0", "#4a5568"),
-            command=lambda: self._set_credentials("lucia@edu.com", "lucia2177$")
-        )
-        btn_lucia.pack(side="right", expand=True, fill="x", padx=3)
-
     def _toggle_password_visibility(self):
         if self.txt_password.cget("show") == "•":
             self.txt_password.configure(show="")
@@ -194,13 +147,6 @@ class LoginView(ctk.CTkFrame):
         else:
             self.txt_password.configure(show="•")
             self.btn_toggle_pass.configure(text="👁️")
-
-    def _set_credentials(self, username: str, passw: str):
-        self.txt_usuario.delete(0, "end")
-        self.txt_usuario.insert(0, username)
-        self.txt_password.delete(0, "end")
-        self.txt_password.insert(0, passw)
-        self.lbl_mensaje.configure(text="")
 
     def _ejecutar_login(self):
         username = self.txt_usuario.get()
