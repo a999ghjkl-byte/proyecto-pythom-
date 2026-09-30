@@ -9,7 +9,7 @@ datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 
 
 a = Analysis(
-    ['main.py'],
+    ['C:/Users/Administrator/Desktop/kardex_login_fullpython/main.py'],
     pathex=[],
     binaries=binaries,
     datas=datas,

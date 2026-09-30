@@ -4,13 +4,37 @@ Aplicación de escritorio moderna construida **completamente en Python** utiliza
 
 ---
 
-## 🚀 Cómo Ejecutar la Aplicación
+## 📦 Opciones de Instalación y Ejecución
 
-Para iniciar el sistema, simplemente ejecuta:
+Tienes **3 formas muy sencillas** de instalar y abrir el sistema:
 
+### 1️⃣ Método Recomendado: Instalador Automático de Windows
+Simplemente haz **doble clic** en el archivo:
+👉 **`INSTALAR_SISTEMA.bat`**
+
+Este asistente se encarga de todo:
+- Instala la aplicación en tu carpeta de programas de Windows (`%LOCALAPPDATA%\SistemaVentas`).
+- Copia el archivo ejecutable autónomo y la base de datos inicial.
+- Crea automáticamente el **Acceso Directo en tu Escritorio** (`Sistema de Ventas PRO`).
+- Agrega el acceso directo en el **Menú Inicio de Windows**.
+- Al finalizar, te pregunta si deseas abrir el sistema de una vez.
+
+### 2️⃣ Método Portable: Acceso Directo Inmediato
+Si prefieres no mover archivos y abrirlo desde esta misma carpeta:
+👉 Haz doble clic en **`CREAR_ACCESO_DIRECTO.bat`**
+Creará un acceso directo en tu Escritorio apuntando directamente a `dist\SistemaVentas.exe`.
+
+### 3️⃣ Abrir Directamente el Ejecutable .EXE
+Puedes ir a la carpeta `dist\` y hacer doble clic en:
+👉 **`dist\SistemaVentas.exe`**
+Es un programa autónomo que abre al instante sin necesidad de tener Python instalado.
+
+### 4️⃣ Ejecución desde Código Fuente (Python)
+Si prefieres ejecutar el código directamente:
 ```bash
 python main.py
 ```
+O haz doble clic en **`EJECUTAR_SISTEMA.bat`**.
 
 ---
 

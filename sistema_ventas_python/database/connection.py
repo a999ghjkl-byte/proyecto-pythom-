@@ -1,9 +1,16 @@
 import sqlite3
 import os
+import sys
 import hashlib
 from typing import Optional
 
-DB_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ventas.db")
+# Determinar directorio base persistente (para scripts y para .EXE compilado)
+if getattr(sys, 'frozen', False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+DB_FILE = os.path.join(BASE_DIR, "ventas.db")
 
 
 class Database:

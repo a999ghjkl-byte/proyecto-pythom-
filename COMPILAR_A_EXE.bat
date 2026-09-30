@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 title Compilador a Ejecutable EXE - Sistema de Ventas
 color 0A
 chcp 65001 >nul

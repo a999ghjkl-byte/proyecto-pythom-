@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 title Sistema de Ventas PRO - Launcher
 color 0B
 chcp 65001 >nul
